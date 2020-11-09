@@ -1,4 +1,5 @@
 <!-- HOMEPAGE -->
+<%@page import='java.sql.*;'%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -41,7 +42,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">
+                  <a class="nav-link" href="products.html">
                     <span data-feather="shopping-cart"></span>
                     Products
                   </a>
@@ -94,19 +95,23 @@
             <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
 
             <h2>Recent Orders</h2>
+			
+			<!--
             <div class="table-responsive">
               <table class="table table-striped table-sm">
                 <thead>
                   <tr>
                     <th>Order #</th>
-                    <th>Item Name</th>
-                    <th>Quantity</th>
-                    <th>Customer</th>
-                    <th>Seller</th>
+                    <th>User ID</th>
+                    <th>Product ID</th>
+                    <th>Category ID</th>
+                    <th>Units</th>
                     <th>Date</th>
                   </tr>
                 </thead>
                 <tbody>
+				
+				 
                   <tr>
                     <td>1</td>
                     <td>Notebook</td>
@@ -131,6 +136,14 @@
                     <td>Ticonderoga</td>
                     <td>Jul 15, 2020</td>
                   </tr>
+				  
+				  -->
+				  <form action = "recent_orders.jsp" method = "POST">
+         User ID: <input type = "text" name = "user_id">
+         <br />
+         <input type = "submit" value = "Submit" />
+      </form>
+
                 </tbody>
               </table>
             </div>
