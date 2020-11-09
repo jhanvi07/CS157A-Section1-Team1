@@ -3,5 +3,3 @@
 Started progress on:
 index.html (homepage - logged in)
 login.html (login page)
-
-Currently pages for display, no functionality underneath.
