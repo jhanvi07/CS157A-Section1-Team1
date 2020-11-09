@@ -1,10 +1,11 @@
 <%@ page import="java.sql.*"%>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <html>
   <head>
     <title>All Products</title>
     </head>
   <body>
-  
+    		<%String category= request.getParameter("category");%>
   
     <h1>All Products</h1>
     
@@ -31,7 +32,7 @@
             out.println(db + " database successfully opened.<br/><br/>");
             out.println("Availible Products <br/><br/>");
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM whms.product");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM whms.product, whms.category WHERE product.category_id=category.category_id AND category_name='" + category +"'");
             while (rs.next()) {%>
               <tr>  <td><%=rs.getInt("product_id")%></td>
                 <td><%=rs.getInt("category_id")%></td>
