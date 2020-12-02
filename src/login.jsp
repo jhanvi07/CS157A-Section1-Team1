@@ -7,7 +7,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <html>
   <head>
-    <title>All Products</title>
+    <title>Login Success</title>
     </head>
   <body>
   
