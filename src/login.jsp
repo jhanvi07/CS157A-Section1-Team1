@@ -26,7 +26,7 @@
         <li class="active"><a href="index.html">Index</a></li>
         <li><a href="#">Orders</a></li>
         <li><a href="products.html">Products</a></li>
-        <li><a href="#">User Page</a></li>
+        <li><a href="userpage.jsp">User Page</a></li>
 		<li><a href="search.html">Product Search</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -38,7 +38,9 @@
   
   
     		<%String username= request.getParameter("username");%>
-			<%String pw= request.getParameter("pw");%>
+			<%String password= request.getParameter("pw");%>
+			<% session.setAttribute("username", username);%>
+			<% session.setAttribute("password", password);%>
 			
 
 
@@ -46,14 +48,14 @@
 		String db = "whms";
         String user; // assumes database name is the same as username
           user = "root";
-        String password = "Bobby";
+        String pw = "Bobby";
 		
 
         try {
             
             java.sql.Connection con; 
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/cs157a?serverTimezone=EST5EDT",user, password);
+            con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/cs157a?serverTimezone=EST5EDT",user, pw);
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM whms.login WHERE email='" + username+"';");
             /* while (rs.next()) {%>
@@ -65,7 +67,7 @@
 			{
 			out.println("Invalid password or username.");
 			}
-			else if(rs.getString("password").equals(pw)&&rs.getString("email").equals(username))
+			else if(rs.getString("password").equals(password)&&rs.getString("email").equals(username))
 			{
 			out.println("Welcome " +username);
 			}
@@ -78,6 +80,10 @@
         } catch(SQLException e) { 
             out.println("SQLException caught: " + e.getMessage()); 
         }
-    %>
+	
+%>
+
+
+
   </body>
 </html>
