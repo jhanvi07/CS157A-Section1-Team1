@@ -52,6 +52,31 @@
     </tbody>
     </table>
 
+    <h1>Billing</h1>
+    <table class="table table-bordered">
+    <thead>
+    <tr><th>Total Billed ($)</th></tr>
+    </thead>
+     <%
+        try {
+            java.sql.Connection con;
+            Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/cs157a?serverTimezone=EST5EDT",user, password);
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM whms.billing_info WHERE order_id='" + order_id +"'");
+            while (rs.next()) {%>
+              <tr>  <td style="text-align: center;"><%=rs.getInt("total")%></td>
+				<%
+            }
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch(SQLException e) {
+            out.println("SQLException caught: " + e.getMessage());
+        }
+    %>
+    </table>
+
     <h1>Tracking Info</h1>
 
     <table class="table table-bordered">
