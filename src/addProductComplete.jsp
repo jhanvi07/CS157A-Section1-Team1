@@ -57,7 +57,7 @@ try {
 	Statement stmt = con.createStatement();
 
 		PreparedStatement ps = null;
-		int rs = stmt.executeUpdate("INSERT INTO whms.product (category_id, product_name, description, unit_price) VALUES (" + intCategory + "," + name + "," + description +  "," + decPrice + ");");
+		int rs = stmt.executeUpdate("INSERT INTO whms.product (category_id, product_name, description, unit_price) VALUES ('" + intCategory + "','" + name + "','" + description +  "','" + decPrice + "');");
     %><h1>Adding product complete</h1><%
 } catch (SQLException e) {
   %><h1>Adding product failed</h1><%
