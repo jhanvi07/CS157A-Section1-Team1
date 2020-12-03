@@ -13,7 +13,7 @@
     <div class="container">
         <div class="row mt-3">
             <form class="offset-sm-4 col-sm-4" action="/generateBillComplete.jsp" method="POST">
-                <select class="form-control">
+                <select class="form-control" name="product_select" id="product_select">
                 <%
                     String db = "whms";
                     String user; // assumes database name is the same as username
@@ -28,7 +28,7 @@
                         Statement stmt = con.createStatement();
                         ResultSet rs = stmt.executeQuery("SELECT * FROM whms.product");
                         while (rs.next()) {%>
-                            <option><%="ID: " + rs.getInt("product_id") + ", " + rs.getString("product_name")%></option>
+                            <option><%=rs.getString("product_name")%></option>
                             <%
                         }
                         rs.close();
@@ -39,7 +39,7 @@
                     }
                 %>
                 </select>
-                <input type="number" class="form-control" placeholder="Quantity" min="1">
+                <input type="number" class="form-control" placeholder="Quantity" min="1" name="quantity" id="quantity">
                 <button class="btn btn-primary">Submit</button>
             </form>
         </div>
