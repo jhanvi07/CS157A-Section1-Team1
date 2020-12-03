@@ -40,13 +40,18 @@
         <div class="row mt-3">
             <form class="offset-sm-4 col-sm-4" action="updateComplete.jsp" method="POST">
                 
-      <select type="text" class="form-control" name="product_id">
-                
+                <select type="text" class="form-control" name="action">
+				<option disabled selected>Select action</option>
+				<option value="delete">Delete product</option>
+				<option value ="update">Update product</option>
+				</select>
+				
+				<select type="text" class="form-control" name="product_id">
 				<option value=11>Home Camera</option>
 				<option value=12>Telescope</option>
 				<option value=13>Wireless Headset</option>
 				<option value=14>Wireless Controller</option>
-				<option value=14>Wireless Controller</option>
+				<option value=155>Controller</option>
 				</select>
 				  <select type="text" class="form-control" name="category">
 					<option disabled selected>Update category</option>
