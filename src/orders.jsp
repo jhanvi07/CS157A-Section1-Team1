@@ -12,6 +12,7 @@
     <h1>Track Order</h1>
     <form action="trackOrder.jsp" method="POST">
         <input type="number" placeholder="order id" class="form-control" name="order_id" id="order_id">
+        <button type="submit" class="btn btn-success" style="margin-top: 10px;">Submit</button>
     </form>
     </div>
   </body>
