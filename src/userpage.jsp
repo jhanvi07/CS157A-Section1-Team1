@@ -15,7 +15,7 @@
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
+        <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="#"><img src="https://pbs.twimg.com/profile_images/1061714658321588224/wxfzDrCe.jpg" alt="" width="24" height="24"</a>
     </div>
@@ -44,44 +44,44 @@ user email: <%out.println(username);%></br>
 String db = "whms";
         String user; // assumes database name is the same as username
           user = "root";
-        String pw = "Bobby";
-		
-            java.sql.Connection con; 
-            Class.forName("com.mysql.cj.jdbc.Driver");
+        String pw = "cs157acs157a";
+
+            java.sql.Connection con;
+            Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/cs157a?serverTimezone=EST5EDT",user, pw);
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM whms.login WHERE email='" + username+"' and password='"+password+"';");
 			rs.next();
 			int user_id=rs.getInt("user_id");
 			out.println("User id: " +user_id);
-			
+
 			rs = stmt.executeQuery("SELECT * FROM whms.user WHERE user_id='" + user_id+"';");
 			rs.next();
 			String phone = rs.getString("phone_no");
 			out.println("<br/>Phone number: "+phone);
-			
+
 			if(rs.getString("website")!=null)
 			{
 				String website=rs.getString("website");
 				out.println("<br/>Website: "+ website);
 			}
-			
+
 			String user_type = rs.getString("user_type");
 			out.println("<br/>User type: "+user_type);
-			
+
 			int address_id = rs.getInt("address_id");
-			
+
 			rs = stmt.executeQuery("SELECT * FROM whms.address WHERE address_id='" + address_id+"';");
 			rs.next();
-			
+
 			String address = rs.getString("address");
 			out.println("<br/>Address: "+address);
-			
-			
-			
+
+
+
 %>
 
 <li><a href="editprofile.html"> Edit Profile</a></li>
 
-</body> 
+</body>
 </html>

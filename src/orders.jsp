@@ -1,23 +1,14 @@
 <%@ page import="java.sql.*"%>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <html>
   <head>
-    <title>Warehouse Recent Orders</title>
+    <title>Track Order</title>
     </head>
   <body>
+    <%String category= request.getParameter("category");%>
 
-  		<%String query= request.getParameter("user_id");%>
+    <h1>Tracking Info</h1>
 
-    <h1>Recent orders</h1>
-
-    <table border="1">
-      <tr>
-        <th>Order #</th>
-		<th>User ID</th>
-		<th>Product ID</th>
-		<th>Category ID</th>
-		<th>Units</th>
-		<th>Date</th>
-   </tr>
     <%
 		String db = "whms";
         String user; // assumes database name is the same as username
@@ -26,21 +17,19 @@
 
 
         try {
-
             java.sql.Connection con;
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/cs157a?serverTimezone=EST5EDT",user, password);
             out.println(db + " database successfully opened.<br/><br/>");
-            out.println("Orders for user ID: "+query+"<br/><br/>");
+            out.println("Availible Products <br/><br/>");
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM whms.order_info WHERE user_id="+query);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM whms.product, whms.category WHERE product.category_id=category.category_id AND category_name='" + category +"'");
             while (rs.next()) {%>
-              <tr>  <td><%=rs.getInt("order_id")%></td>
-                <td><%=rs.getInt("user_id")%></td>
-                <td><%=rs.getInt("product_id")%></td>
-				<td><%=rs.getString("category_id")%></td>
-				<td><%=rs.getInt("units")%></td>
-				<td><%=rs.getDate("date")%></td></tr>
+              <tr>  <td><%=rs.getInt("product_id")%></td>
+                <td><%=rs.getInt("category_id")%></td>
+                <td><%=rs.getString("product_name")%></td>
+				<td><%=rs.getString("description")%></td>
+				<td><%=rs.getString("unit_price")%></td>
 				<%
             }
             rs.close();

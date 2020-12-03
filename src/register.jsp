@@ -15,7 +15,7 @@
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
+        <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="#"><img src="https://pbs.twimg.com/profile_images/1061714658321588224/wxfzDrCe.jpg" alt="" width="24" height="24"</a>
     </div>
@@ -50,11 +50,11 @@
 String db = "whms";
 String user; // assumes database name is the same as username
   user = "root";
-String pw = "Bobby";
+String pw = "cs157acs157a";
 
 
-	java.sql.Connection con; 
-	Class.forName("com.mysql.cj.jdbc.Driver");
+	java.sql.Connection con;
+	Class.forName("com.mysql.jdbc.Driver");
 	con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/cs157a?serverTimezone=EST5EDT",user, pw);
 	Statement stmt = con.createStatement();
 	ResultSet rs = stmt.executeQuery("SELECT COUNT(*) AS 'check' FROM whms.login WHERE email='" + email+"';");
@@ -65,8 +65,8 @@ String pw = "Bobby";
 	}
 	else{
 		PreparedStatement ps = null;
-		
-		
+
+
 		String sql="INSERT INTO whms.login(email, password) VALUES(?,?);";
 		ps = con.prepareStatement(sql);
 		ps.setString(1, email);
@@ -80,8 +80,8 @@ String pw = "Bobby";
 		{
 		out.print("There is a problem in updating password.<br/>");
 		}
-		
-		
+
+
 		sql="INSERT INTO whms.address(address) Values(?);";
 		ps = con.prepareStatement(sql);
 		ps.setString(1,address);
@@ -94,16 +94,16 @@ String pw = "Bobby";
 		{
 		out.print("There is a problem in updating address.<br/>");
 		}
-		
+
 		rs = stmt.executeQuery("SELECT user_id FROM whms.login WHERE email='" + email+"' and password='"+password+"';");
 		rs.next();
 		int user_id=rs.getInt("user_id");
 		session.setAttribute("user_id", user_id);
-		
+
 		rs = stmt.executeQuery("SELECT address_id FROM whms.address WHERE address='" + address+"';");
 		rs.next();
 		int address_id=rs.getInt("address_id");
-		
+
 		sql="INSERT INTO whms.user(user_id, user_name, user_type, address_id, email, phone_no) VALUES(?,?,?,?,?,?);";
 		ps = con.prepareStatement(sql);
 		ps.setInt(1, user_id);
@@ -121,14 +121,14 @@ String pw = "Bobby";
 		{
 		out.print("There is a problem in updating password.<br/>");
 		}
-		
+
 	}
 
-			
-			
-			
+
+
+
 %>
 <li><a href="editprofile.html"> Edit Profile</a></li>
 
-</body> 
+</body>
 </html>
