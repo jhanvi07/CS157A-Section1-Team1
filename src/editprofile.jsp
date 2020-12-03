@@ -38,15 +38,18 @@
 <%String password= request.getParameter("password");%>
 
 <% String username = (String)session.getAttribute("username");%>
-<%out.println(username);%>
-<%String new_username= request.getParameter("new_username");%>
+
+<% int user_id = (int)session.getAttribute("user_id");%>
+
+
 <%String new_email= request.getParameter("new_email");%>
 <%String new_password= request.getParameter("new_password");%>
+<%String new_name= request.getParameter("new_name");%>
 <%String new_address= request.getParameter("new_address");%>
 <%String new_phone= request.getParameter("new_phone");%>
 <%String new_website= request.getParameter("new_website");%>
 
-<%out.println(new_password);%>
+
 
 <%
 String db = "whms";
@@ -60,25 +63,127 @@ String db = "whms";
             PreparedStatement ps = null;
             try
 {
+if(new_email.length()>0)
+{
+	String sql="Update whms.login set email=? WHERE email='"+username+"';";
+	ps = con.prepareStatement(sql);
+	ps.setString(1,new_email);
+	int i = ps.executeUpdate();
+	
+	String sql1="Update whms.user set email=? WHERE email='"+username+"';";
+	ps = con.prepareStatement(sql1);
+	ps.setString(1,new_email);
+	int j = ps.executeUpdate();
+	if(i > 0 && j > 0)
+	{
+	out.print("Email Updated Successfully<br/>");
+	session.setAttribute("username", new_email);
+	}
+	else
+	{
+	out.print("There is a problem in updating email.<br/>");
+	}
+	
+	
+}
 
-String sql="Update whms.login set email=?,password=? WHERE email='"+username+"';";
-ps = con.prepareStatement(sql);
-ps.setString(1,new_email);
-ps.setString(2, new_email);
-int i = ps.executeUpdate();
-if(i > 0)
+if(new_password.length()>0)
 {
-out.print("Record Updated Successfully");
-}
-else
+	String sql="Update whms.login set password=? WHERE email='"+username+"';";
+	ps = con.prepareStatement(sql);
+	ps.setString(1,new_password);
+	int i = ps.executeUpdate();
+	if(i > 0)
+	{
+	out.print("Password Updated Successfully<br/>");
+	session.setAttribute("password", new_password);
+	}
+	else
+	{
+	out.print("There is a problem in updating password.<br/>");
+	}
+}	
+
+if(new_name.length()>0)
 {
-out.print("There is a problem in updating Record.");
+	String sql="Update whms.user set user_name=? WHERE email='"+username+"';";
+	ps = con.prepareStatement(sql);
+	ps.setString(1,new_name);
+	int i = ps.executeUpdate();
+	if(i > 0)
+	{
+	out.print("Name Updated Successfully<br/>");
+	}
+	else
+	{
+	out.print("There is a problem in updating name.<br/>");
+	}
 }
-}
-catch(SQLException sql)
+
+if(new_address.length()>0)
 {
-request.setAttribute("error", sql);
-out.println(sql);
+	String sql="Update whms.address set address=? WHERE (SELECT address_id FROM whms.user WHERE email='"+username+"') = address.address_id;";
+	ps = con.prepareStatement(sql);
+	ps.setString(1,new_address);
+	int i = ps.executeUpdate();
+	if(i > 0)
+	{
+	out.print("Address Updated Successfully<br/>");
+	}
+	else
+	{
+	out.print("There is a problem in updating email.<br/>");
+	}
+}
+
+if(new_phone.length()>0)
+{
+	String sql="Update whms.user set phone_no=? WHERE email='"+username+"';";
+	ps = con.prepareStatement(sql);
+	ps.setString(1,new_phone);
+	int i = ps.executeUpdate();
+	if(i > 0)
+	{
+	out.print("Phone Number Updated Successfully<br/>");
+	}
+	else
+	{
+	out.print("There is a problem in updating phone number.<br/>");
+	}
+}
+	
+}
+	catch(SQLException sql)
+	{
+	request.setAttribute("error", sql);
+	out.println(sql);
+	}
+
+if(new_website.length()>0)
+{
+	String check="SELECT user_type FROM whms.user WHERE email='"+username+"';";
+	
+	ResultSet rs = con.createStatement().executeQuery(check);
+	rs.next();
+	if(rs.getString("user_type").equals("customer"))
+	{
+		out.println("Customers do not have website<br/>");
+	}
+	else if(rs.getString("user_type").equals("seller"))
+	{
+		String sql="Update whms.user set website=? WHERE email='"+username+"';";
+		ps = con.prepareStatement(sql);
+		ps.setString(1,new_website);
+		int i = ps.executeUpdate();
+		if(i > 0)
+		{
+		out.print("Phone Number Updated Successfully<br/>");
+		}
+		else
+		{
+		out.print("There is a problem in updating website.<br/>");
+		}
+	}
 }
 
 			
@@ -86,9 +191,7 @@ out.println(sql);
 			
 %>
 
-
-
-
+<li><a href="userpage.jsp">return to user profile</a></li>
 
 </body>
 </html>
