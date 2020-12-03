@@ -22,13 +22,13 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li class="active"><a href="index.html">Index</a></li>
-        <li><a href="#">Orders</a></li>
+        <li><a href="userpage.jsp">Orders</a></li>
         <li><a href="products.html">Products</a></li>
         <li><a href="userpage.jsp">User Page</a></li>
 		<li><a href="search.html">Product Search</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> LogOut</a></li>
+        <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li>
       </ul>
     </div>
   </div>
@@ -76,8 +76,9 @@ if(new_email.length()>0)
 	int j = ps.executeUpdate();
 	if(i > 0 && j > 0)
 	{
-	out.print("Email Updated Successfully<br/>");
-	session.setAttribute("username", new_email);
+	username=new_email;
+	session.setAttribute("username", username);
+	out.print("Email Updated Successfully to: "+username+" <br/>");
 	}
 	else
 	{
