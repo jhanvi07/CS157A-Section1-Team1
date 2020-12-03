@@ -22,7 +22,7 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li class="active"><a href="index.html">Index</a></li>
-        <li><a href="#">Orders</a></li>
+        <li><a href="orders.jsp">Orders</a></li>
         <li><a href="products.html">Products</a></li>
         <li><a href="#">User Page</a></li>
 		<li><a href="search.html">Product Search</a></li>
