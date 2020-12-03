@@ -41,6 +41,8 @@
 <%String category= request.getParameter("category");%>
 <%String name= request.getParameter("name");%>
 <%String description= request.getParameter("description");%>
+<%String action= request.getParameter("action");%>
+
 
 <h2>Update Status</h2>
 
@@ -54,58 +56,66 @@ String db = "whms";
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/cs157a?serverTimezone=EST5EDT",user, pw);
             PreparedStatement ps = null;
-           
-  if(category!=null)
-{
-	String sql="Update whms.product set category_id=? WHERE product_id='"+product_id+"';";
-	ps = con.prepareStatement(sql);
-	ps.setString(1,category);
-	int i = ps.executeUpdate();
-	
-	if(i > 0)
-	{
-	out.print("Category Updated Successfully to: "+category+" <br/>");
-	}
-	else
-	{
-	out.print("There is a problem in updating category.<br/>");
-	}
-	
-} 
+ if(action.equals("delete"))
+ {
+	Statement st=con.createStatement();
+	int i=st.executeUpdate("DELETE FROM whms.product WHERE product_id="+product_id);
+	out.println("Data Deleted Successfully!");
 
-if(name.length()>0)
-{
-	String sql1="Update whms.product set product_name=? WHERE product_id='"+product_id+"';";
-	ps = con.prepareStatement(sql1);
-	ps.setString(1,name);
-	int i = ps.executeUpdate();
-	
-	if(i > 0)
+ }
+ else
+ { 
+	  if(category!=null)
 	{
-	out.print("Product name Updated Successfully to: "+name+" <br/>");
-	}
-	else
-	{
-	out.print("There is a problem in updating name.<br/>");
-	}
-}	
+		String sql="Update whms.product set category_id=? WHERE product_id='"+product_id+"';";
+		ps = con.prepareStatement(sql);
+		ps.setString(1,category);
+		int i = ps.executeUpdate();
+		
+		if(i > 0)
+		{
+		out.print("Category Updated Successfully to: "+category+" <br/>");
+		}
+		else
+		{
+		out.print("There is a problem in updating category.<br/>");
+		}
+		
+	} 
 
-if(description.length()>0)
-{
-	String sql="Update whms.product set description=? WHERE product_id='"+product_id+"';";
-	ps = con.prepareStatement(sql);
-	ps.setString(1,description);
-	int i = ps.executeUpdate();
-	if(i > 0)
+	if(name.length()>0)
 	{
-	out.print("description Updated Successfully<br/>");
-	}
-	else
+		String sql1="Update whms.product set product_name=? WHERE product_id='"+product_id+"';";
+		ps = con.prepareStatement(sql1);
+		ps.setString(1,name);
+		int i = ps.executeUpdate();
+		
+		if(i > 0)
+		{
+		out.print("Product name Updated Successfully to: "+name+" <br/>");
+		}
+		else
+		{
+		out.print("There is a problem in updating name.<br/>");
+		}
+	}	
+
+	if(description.length()>0)
 	{
-	out.print("There is a problem in updating description.<br/>");
+		String sql="Update whms.product set description=? WHERE product_id='"+product_id+"';";
+		ps = con.prepareStatement(sql);
+		ps.setString(1,description);
+		int i = ps.executeUpdate();
+		if(i > 0)
+		{
+		out.print("description Updated Successfully<br/>");
+		}
+		else
+		{
+		out.print("There is a problem in updating description.<br/>");
+		}
 	}
 }
-
 
 
 
