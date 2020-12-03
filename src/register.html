@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+
+    <div class="container">
+        <div class="row mt-3">
+            <div class="col-md-6 offset-md-3">
+				<form action = "register.jsp" method = "POST">
+                <form class="form-editprofile">
+                    
+                    <h1 class="h3 mb-3 font-weight-normal">Create User Profile</h1>
+					
+					<div class="radio">
+						  <label><input type="radio" name="user_type" value="customer" checked>Customer account</label>
+						</div>
+						<div class="radio">
+						  <label><input type="radio" name="user_type" value="seller">Seller account</label>
+						</div>
+						<div class="radio disabled">
+					
+                    <label for="inputEmail" >Email</label>
+                    <input type="text" name ="email" id="inputEmail" class="form-control" placeholder="email" required>
+					<br/>
+					
+					<label for="inputPassword"> Password</label>
+                    <input type="password" name="password" id="inputPassword" class="form-control" placeholder=" password" required>
+                    <br />
+					
+					<label for="inputName"> Name</label>
+                    <input type="name" name="name" id="nsmr" class="form-control" placeholder=" name" >
+                    <br />
+					
+					<label for="inputAddress"> Address</label>
+                    <input type="address" name="address" id="inputAddress" class="form-control" placeholder=" address">
+                    <br />
+					
+					<label for="inputPhone"> Phone Number</label>
+                    <input type="phone" name="phone" id="inputPhone" class="form-control" placeholder=" phone number">
+                    <br />
+					
+					<label for="inputWebsite"> Website</label>
+                    <input type="website" name="website" id="inputWebsite" class="form-control" placeholder=" website">
+                    <br />
+					
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+                  </form>
+            </div>
+
+        </div>
+    </div>
+
+
+</body>
+
