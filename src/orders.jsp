@@ -7,6 +7,8 @@
   <body>
 
     <div class="container" style="margin-top: 5vh;">
+    <a href="index.html" class="btn btn-primary" style="margin-bottom: 20px;">Return to home</a>
+
     <h1>Track Order</h1>
     <form action="trackOrder.jsp" method="POST">
         <input type="number" placeholder="order id" class="form-control" name="order_id" id="order_id">
