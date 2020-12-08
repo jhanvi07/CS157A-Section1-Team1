@@ -41,7 +41,6 @@
             <form class="offset-sm-4 col-sm-4" action="updateComplete.jsp" method="POST">
                 
                 <select type="text" class="form-control" name="action">
-				<option disabled selected>Select action</option>
 				<option value="delete">Delete product</option>
 				<option value ="update">Update product</option>
 				</select>
