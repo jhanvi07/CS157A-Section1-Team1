@@ -14,12 +14,12 @@
         <%String product = request.getParameter("product_select");%>
         <%String quantity = request.getParameter("quantity");%>
 
-        <a href="generateBill.jsp" class="btn btn-primary">Return to generateBill</a>
+        <a href="generateBill.jsp" class="btn btn-primary">Return to homepage</a>
         <%
             String db = "whms";
             String user; // assumes database name is the same as username
             user = "root";
-            String pw = "cs157acs157a";
+            String pw = "Bobby";
 
 
             // Alter table to be auto increment.
@@ -35,7 +35,7 @@
                 else { out.println("no userid found"); }
 
                 rsSet = stmt.executeQuery("SELECT * FROM whms.product WHERE product_name='" + product + "';");
-                out.println(product);
+              
                 double price = 0;
                 int product_id = 0;
                 int category_id = 0;
@@ -56,7 +56,7 @@
                 int rs2 = stmt.executeUpdate("INSERT INTO whms.Order_info (order_id, user_id, product_id, category_id, units, date) VALUES (" + order_id + "," + user_id + "," + product_id + "," +  category_id + ","  + Integer.parseInt(quantity) + "," + "now()" + ")");
 
 
-                rsSet = stmt.executeQuery("SELECT * FROM whms.address WHERE address_id='" + user_id +  "'");
+                rsSet = stmt.executeQuery("SELECT * FROM whms.address WHERE address_id= (SELECT address_id FROM whms.user WHERE user_id='"+user_id+"')");
                 String addressString = "";
                 if (rsSet.next()) { addressString = rsSet.getString("address") + ""; }
                 else {  out.println("Couldn't find matching address"); }
