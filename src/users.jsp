@@ -30,7 +30,7 @@
         <li><a href="userpage.jsp">User Page</a></li>
 		<li><a href="search.html">Product Search</a></li>
 		<li><a href="update.jsp">Update Product</a></li>
-		<li><a href="addProduct.jsp">Update Product</a></li>
+		<li><a href="addProduct.jsp">Add Product</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
@@ -52,7 +52,6 @@
 		<th>User Type</th>
 		<th>Email</th>
 		<th>Phone Number</th>
-		<th>Website</th>
 		<th>Address</th>
    </tr>
     <% 
@@ -77,7 +76,7 @@
 			}
 			else
 			{
-				out.println("Search results for "+type+" containing: "+search+"<br/>");
+				out.println("Search results for "+type+" with names containing: "+search+"<br/>");
 				q="SELECT * FROM whms.user,whms.address WHERE user.address_id=address.address_id AND user_type LIKE '"+type+"' AND user_name LIKE '%"+search+"%';";
 			}
 			ResultSet rs = stmt.executeQuery(q);
@@ -86,7 +85,6 @@
                 <td><%=rs.getString("user_type")%></td>
                 <td><%=rs.getString("email")%></td>
 				<td><%=rs.getString("phone_no")%></td>
-				<td><%=rs.getString("website")%></td>
 				<td><%=rs.getString("address")%></td>
 			<%
 			}
