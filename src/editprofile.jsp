@@ -26,6 +26,8 @@
         <li><a href="products.html">Products</a></li>
         <li><a href="userpage.jsp">User Page</a></li>
 		<li><a href="search.html">Product Search</a></li>
+		<li><a href="update.jsp">Update Product</a></li>
+		<li><a href="addProduct.jsp">Add Product</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li>
@@ -37,9 +39,8 @@
 
 <%String password= request.getParameter("password");%>
 
-<% String username = (String)session.getAttribute("username");%>
-
-<% int user_id = (int)session.getAttribute("user_id");%>
+<% String username = (String)session.getAttribute("username");;
+%>
 
 
 <%String new_email= request.getParameter("new_email");%>
@@ -61,8 +62,10 @@ String db = "whms";
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/cs157a?serverTimezone=EST5EDT",user, pw);
             PreparedStatement ps = null;
-            try
-{
+
+ResultSet check = con.createStatement().executeQuery("SELECT * FROM whms.login WHERE email='"+username+"';");
+
+if(check.next() && check.getString("password").equals(password)){
 if(new_email.length()>0)
 {
 	String sql="Update whms.login set email=? WHERE email='"+username+"';";
@@ -152,19 +155,13 @@ if(new_phone.length()>0)
 	out.print("There is a problem in updating phone number.<br/>");
 	}
 }
-	
-}
-	catch(SQLException sql)
-	{
-	request.setAttribute("error", sql);
-	out.println(sql);
-	}
+
 
 if(new_website.length()>0)
 {
-	String check="SELECT user_type FROM whms.user WHERE email='"+username+"';";
+	String check_seller="SELECT user_type FROM whms.user WHERE email='"+username+"';";
 	
-	ResultSet rs = con.createStatement().executeQuery(check);
+	ResultSet rs = con.createStatement().executeQuery(check_seller);
 	rs.next();
 	if(rs.getString("user_type").equals("customer"))
 	{
@@ -186,6 +183,11 @@ if(new_website.length()>0)
 		}
 	}
 }
+}
+else{
+	out.println("Incorrect password");
+}
+	
 
 			
 			
